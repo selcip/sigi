@@ -1,7 +1,81 @@
 {% extends "layouts/master.html" %}
 {% block content %}
     {% include 'layouts/core/nav.html' %}   
-    <div class="container">
-        fasd
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Start Bootstrap
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Shortcuts</a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#">Events</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Services</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Simple Sidebar</h1>
+                        <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
+                        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
+{% endblock %}
+
+{% block custom_scripts %}
+    {% load static %}    
+    <script src="{% static "js/jQueryFileTree.min.js" %}"></script>
+    <script type="text/javascript">
+    // keeps the selector to assign the selected file
+    console.log('ta indo')
+        var selector;
+        // Setting up jQuery to pass csrf tokens to Django when using ajax.
+        $.ajaxSetup({data: {
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        }});
+        // Loads the file browser
+          $(document).ready(function() {
+            $('#sidebar-wrapper').fileTree({
+            script: '/files/',
+            root: '{{ dir }}',
+            expandSpeed: 100,
+            collapseSpeed: 100,
+            multiFolder: false
+            }, function(file) {
+                console.log(file)
+            }).on('filetreeclicked', function(e, data) {
+                console.log(data);
+            });
+
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+        });  
+    </script>
 {% endblock %}
