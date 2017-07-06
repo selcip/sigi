@@ -14,7 +14,8 @@ import os
 class HomePageView(TemplateView):
     @method_decorator(login_required)
     def get(self, request, **kwargs):
-        return render(request, 'index.html', {'dir': settings.BASE_DIR + settings.MEDIA_ROOT})
+        diretorio = settings.BASE_DIR + settings.MEDIA_ROOT
+        return render(request, 'index.html', {'dir': diretorio})
 
 
 def dirlist(request):
@@ -28,9 +29,10 @@ def dirlist(request):
                 r.append(
                     '<li class="directory collapsed"><a href="#" rel="%s/">%s</a></li>' % (ff, f))
             else:
+                # do nothing
                 e = os.path.splitext(f)[1][1:]  # get .ext and remove dot
-                r.append(
-                    '<li class="file ext_%s"><a href="#" rel="%s">%s</a></li>' % (e, ff, f))
+                # r.append(
+                #     '<li class="file ext_%s"><a href="#" rel="%s">%s</a></li>' % (e, ff, f))
         r.append('</ul>')
     except Exception, e:
         r.append('Could not load directory: %s' % str(e))

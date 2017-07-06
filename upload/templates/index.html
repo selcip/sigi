@@ -61,15 +61,18 @@
         // Loads the file browser
           $(document).ready(function() {
             $('#sidebar-wrapper').fileTree({
-            script: '/files/',
-            root: '{{ dir }}',
-            expandSpeed: 100,
-            collapseSpeed: 100,
-            multiFolder: false
+                script: '/files/',
+                root: '{{ dir }}',
+                expandSpeed: 100,
+                collapseSpeed: 100,
+                multiFolders: false,
+                onlyFolders: true
             }, function(file) {
                 console.log(file)
             }).on('filetreeclicked', function(e, data) {
-                console.log(data);
+                console.log(data)
+            }).on('filetreeexpanded', function(e, data) {
+                console.log(data)
             });
 
             $("#menu-toggle").click(function(e) {
