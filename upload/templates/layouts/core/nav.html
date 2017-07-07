@@ -1,32 +1,19 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+  <a class="navbar-brand" href="#">SIGI - CPTEC</a>
 
-<nav class="navbar navbar-inverse" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">SIGI - CPTEC</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Início</a></li>
-            <li><a href="#">Lista</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.first_name }} <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    {% if user.is_staff %}
-                    <li><a href="/admin">Painel de controle</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'logout' %}">Sair</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div><!-- /.navbar-collapse -->
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav">
+        <li class="nav-item active"><a class="nav-link" href="#">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Lista</a></li>        
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        {% if user.is_staff %}
+        <li class="nav-item"><a class="nav-link" href="/admin">Painel de controle</a></li>       
+        {% endif %}
+        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Sair</a></li>
+    </ul>
+  </div>
 </nav>

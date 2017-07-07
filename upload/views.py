@@ -38,3 +38,26 @@ def dirlist(request):
         r.append('Could not load directory: %s' % str(e))
     r.append('</ul>')
     return HttpResponse(''.join(r))
+
+def itemlist(request):
+    try:
+        response = ['']
+        d = request.POST.get('dir')
+        for f in os.listdir(d):
+            ff = os.path.join(d, f)
+            if os.path.isdir(ff):
+                response.append(
+                    '<div class="col-lg-2"><div class="card"><h4 class="card-header">%s</h4></div></div>' % (f)
+                )
+            else:
+                e = os.path.splitext(f)[1][1:]
+                response.append(
+                    '<div class="col-lg-2"><div class="card"><h4 class="card-header">%s</h4>' % (f)
+                )
+                response.append(ff)
+                response.append(
+                    '<div class="card-footer text-muted text-xs-center">%s</div></div></div>' % (e)
+                )
+    except Exception, e:
+        response.append('deu bad')
+    return HttpResponse(response)
